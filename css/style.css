@@ -23,7 +23,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background:
     linear-gradient(rgba(244,247,251,.92), rgba(244,247,251,.92)),
     linear-gradient(90deg, rgba(0,87,184,.06) 1px, transparent 1px),
@@ -84,13 +84,10 @@ img { max-width: 100%; }
 }
 
 .brand { display: flex; gap: 12px; align-items: center; margin-bottom: 34px; }
-.brand-mark {
-  width: 44px; height: 44px; border-radius: 14px;
-  display: grid; place-items: center; background: white; color: var(--primary);
-  font-size: 22px; font-weight: 800;
-}
-.brand strong { display: block; font-size: 20px; }
+.compact-brand { align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,.16); padding-bottom: 18px; }
+.brand strong { display: block; font-size: 19px; }
 .brand span { display: block; font-size: 12px; opacity: .78; margin-top: 2px; }
+.brand-kicker { margin: 0 0 4px; color: #9de5ef; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; opacity: 1 !important; }
 
 .nav-menu { display: grid; gap: 8px; }
 .nav-link { position: relative; padding: 13px 14px 13px 36px; border-radius: 12px; color: rgba(255,255,255,.82); transition: .2s ease; }
@@ -98,22 +95,22 @@ img { max-width: 100%; }
 .nav-link:hover, .nav-link.active { background: rgba(255,255,255,.14); color: white; transform: translateX(2px); }
 .nav-link:hover::before, .nav-link.active::before { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 0 5px rgba(18,184,201,.15); }
 
-.sidebar-note { margin-top: auto; padding: 16px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: rgba(255,255,255,.08); }
-.sidebar-note p { margin: 8px 0 0; line-height: 1.5; font-size: 12px; opacity: .84; }
-.cx-sidebar-logo { width: 96px; height: auto; display: block; margin: 0 0 12px; padding: 8px; border-radius: 14px; background: rgba(255,255,255,.92); }
+.sidebar-note { margin-top: auto; padding: 16px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: rgba(255,255,255,.07); }
+.sidebar-note p { margin: 7px 0 0; line-height: 1.45; font-size: 12px; opacity: .84; }
+.cx-sidebar-logo { width: 118px; height: auto; display: block; margin: 0 0 12px; filter: drop-shadow(0 14px 24px rgba(0,0,0,.25)); }
 
 .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 28px 38px 20px; }
 .topbar { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.topbar h1 { margin: 4px 0 0; font-size: clamp(26px, 3vw, 36px); }
+.topbar h1 { margin: 4px 0 0; font-size: clamp(22px, 2.4vw, 30px); }
 .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 800; color: var(--primary); }
 .eyebrow.light { color: rgba(255,255,255,.72); }
 .icon-button { border: 0; background: var(--surface); width: 42px; height: 42px; border-radius: 12px; box-shadow: var(--shadow); }
 .menu-button { display: none; }
 
 .hero {
-  min-height: 250px;
-  border-radius: 26px;
-  padding: 36px;
+  min-height: 224px;
+  border-radius: 22px;
+  padding: 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -128,11 +125,10 @@ img { max-width: 100%; }
 }
 .hero::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(120deg, transparent 0 40%, rgba(255,255,255,.16) 50%, transparent 60%); transform: translateX(-100%); animation: scanLine 7s ease-in-out infinite; pointer-events: none; }
 .hero > * { position: relative; z-index: 1; }
-.hero h2 { margin: 10px 0 14px; max-width: 760px; font-size: clamp(28px, 4vw, 48px); line-height: 1.08; }
-.hero p { max-width: 650px; margin: 0; color: rgba(255,255,255,.82); line-height: 1.65; }
-.hero-brand-card { width: 170px; min-width: 170px; padding: 16px; border-radius: 22px; border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.9); color: var(--primary-dark); box-shadow: 0 20px 44px rgba(0,0,0,.14); text-align: center; }
-.hero-brand-card img { width: 122px; display: block; margin: 0 auto 8px; }
-.hero-brand-card span { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.hero h2 { margin: 10px 0 12px; max-width: 660px; font-size: clamp(24px, 3.2vw, 38px); line-height: 1.12; }
+.hero p { max-width: 590px; margin: 0; color: rgba(255,255,255,.84); line-height: 1.55; font-size: 15px; }
+.hero-brand-card { width: 156px; min-width: 156px; padding: 0; border: 0; background: transparent; color: white; box-shadow: none; text-align: center; }
+.hero-brand-card img { width: 150px; display: block; margin: 0 auto; filter: drop-shadow(0 16px 24px rgba(0,0,0,.25)); }
 .hero-metrics { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
 .hero-metrics span { padding: 8px 11px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); font-size: 12px; font-weight: 800; }
 @keyframes scanLine { 0%, 60% { transform: translateX(-110%); } 100% { transform: translateX(110%); } }
@@ -146,9 +142,10 @@ img { max-width: 100%; }
   box-shadow: var(--shadow);
   padding: 24px;
   min-width: 0;
+  max-width: 100%;
 }
-.assistant-panel h2, .workspace-card h2 { margin: 6px 0; }
-.assistant-panel p { margin: 0 0 18px; color: var(--muted); }
+.assistant-panel h2, .workspace-card h2 { margin: 6px 0; font-size: 22px; }
+.assistant-panel p { margin: 0 0 16px; color: var(--muted); font-size: 14px; }
 .assistant-form { display: flex; gap: 12px; }
 .assistant-form input { flex: 1; min-width: 0; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; outline: none; }
 .assistant-form input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0,87,184,.10); }
@@ -170,14 +167,14 @@ img { max-width: 100%; }
 
 .section-block { margin-top: 30px; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 16px; }
-.section-heading h2 { margin: 5px 0 0; font-size: 28px; }
+.section-heading h2 { margin: 5px 0 0; font-size: 24px; }
 .tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-.tool-card { position: relative; overflow: hidden; background: rgba(255,255,255,.94); border: 1px solid var(--border); padding: 22px; border-radius: var(--radius); box-shadow: 0 8px 24px rgba(16,40,72,.06); transition: .2s ease; }
+.tool-card { position: relative; overflow: hidden; background: rgba(255,255,255,.94); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); box-shadow: 0 8px 24px rgba(16,40,72,.06); transition: .2s ease; }
 .tool-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, var(--primary), var(--teal)); transform: scaleX(0); transform-origin: left; transition: .25s ease; }
 .tool-card:hover { transform: translateY(-4px); border-color: #a7c8ed; box-shadow: var(--shadow); }
 .tool-card:hover::before { transform: scaleX(1); }
-.tool-card h3 { margin: 16px 0 8px; }
-.tool-card p { color: var(--muted); line-height: 1.55; min-height: 72px; }
+.tool-card h3 { margin: 14px 0 8px; font-size: 18px; }
+.tool-card p { color: var(--muted); line-height: 1.48; min-height: 50px; font-size: 14px; }
 .tool-card span { color: var(--primary); font-weight: 750; }
 .tool-icon { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; background: linear-gradient(135deg, var(--primary-light), #ddf7fb); color: var(--primary); font-size: 12px; font-weight: 900; letter-spacing: .04em; box-shadow: inset 0 0 0 1px rgba(0,87,184,.08); }
 
@@ -310,7 +307,13 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
   .main-content { padding-inline: 14px; }
   .tool-main { width: min(calc(100vw - 32px), 380px); max-width: none; margin-inline: auto; padding-inline: 0; }
   .tool-grid { grid-template-columns: 1fr; }
-  .hero h2 { font-size: 30px; }
+  .hero { max-width: 100%; padding: 24px; border-radius: 20px; }
+  .hero h2 { font-size: 28px; }
+  .hero p { font-size: 14px; }
+  .hero-brand-card { align-self: center; width: 138px; min-width: 0; }
+  .hero-brand-card img { width: 132px; }
+  .assistant-form input,
+  .assistant-form .button { width: 100%; }
   .footer { flex-direction: column; }
   .workspace-card { width: 100%; padding: 18px; overflow: hidden; }
   .tool-intro p { max-width: 100%; overflow-wrap: anywhere; }

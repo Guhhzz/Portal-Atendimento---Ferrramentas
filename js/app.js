@@ -82,7 +82,7 @@
         return;
       }
 
-      result.appendChild(createStatus('Ainda n\u00e3o encontrei uma ferramenta exata. Escolha uma das op\u00e7\u00f5es dispon\u00edveis abaixo.', 'info'));
+      result.appendChild(createStatus('N\u00e3o achei uma correspond\u00eancia. Veja as ferramentas abaixo.', 'info'));
     });
   }
 
