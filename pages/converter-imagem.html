@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Converta imagens para JPG, PNG ou WEBP diretamente no navegador.">
+  <title>Converter imagem | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Ferramenta</span>
+        <h1>Converter imagem</h1>
+      </div>
+      <a class="back-link" href="../index.html">&larr; Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <div class="tool-intro">
+        <p>Converta uma imagem para JPG, PNG ou WEBP. O processamento acontece no seu navegador.</p>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#8679;</div>
+        <h2>Arraste uma imagem aqui</h2>
+        <p>ou selecione um arquivo do computador</p>
+        <label class="button secondary" for="fileInput">Selecionar imagem</label>
+        <input id="fileInput" type="file" accept="image/*">
+      </div>
+
+      <div id="previewArea" class="preview-area"></div>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="outputFormat">Formato de sa&iacute;da</label>
+          <select id="outputFormat">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="quality">Qualidade: <span id="qualityValue">90%</span></label>
+          <input id="quality" type="range" min="40" max="100" value="90">
+          <small>Usada principalmente em JPG e WEBP.</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="button primary" id="convertButton" type="button" disabled>Converter e baixar</button>
+        <button class="button secondary" id="clearButton" type="button">Limpar</button>
+      </div>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script type="module" src="../js/image-converter.js"></script>
+</body>
+</html>

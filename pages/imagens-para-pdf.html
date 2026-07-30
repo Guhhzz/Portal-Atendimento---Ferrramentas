@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gere um PDF com varias imagens diretamente no navegador.">
+  <title>Imagens para PDF | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Ferramenta</span>
+        <h1>Imagens para PDF</h1>
+      </div>
+      <a class="back-link" href="../index.html">&larr; Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <div class="tool-intro">
+        <p>Adicione imagens, ajuste a ordem da lista e gere um &uacute;nico PDF. Nenhum arquivo &eacute; enviado para servidor.</p>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#8679;</div>
+        <h2>Adicione uma ou mais imagens</h2>
+        <p>A ordem da lista ser&aacute; usada no PDF.</p>
+        <label class="button secondary" for="fileInput">Selecionar imagens</label>
+        <input id="fileInput" type="file" accept="image/*" multiple>
+      </div>
+
+      <div class="controls-grid compact-controls">
+        <div class="field">
+          <label for="orientation">Orienta&ccedil;&atilde;o</label>
+          <select id="orientation">
+            <option value="portrait">Retrato</option>
+            <option value="landscape">Paisagem</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="pdfList" class="pdf-list" aria-live="polite"></div>
+
+      <div class="actions">
+        <button class="button primary" id="generateButton" type="button" disabled>Gerar PDF</button>
+        <button class="button secondary" id="clearButton" type="button" disabled>Limpar tudo</button>
+      </div>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+  <script type="module" src="../js/images-to-pdf.js"></script>
+</body>
+</html>

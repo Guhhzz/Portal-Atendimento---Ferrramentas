@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprima imagens em WEBP diretamente no navegador.">
+  <title>Comprimir imagem | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Ferramenta</span>
+        <h1>Comprimir imagem</h1>
+      </div>
+      <a class="back-link" href="../index.html">&larr; Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <div class="tool-intro">
+        <p>Reduza imagens ajustando qualidade e largura m&aacute;xima. Algumas imagens j&aacute; otimizadas podem n&atilde;o ficar menores.</p>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#8679;</div>
+        <h2>Selecione uma imagem</h2>
+        <p>A sa&iacute;da ser&aacute; gerada em WEBP para reduzir o tamanho.</p>
+        <label class="button secondary" for="fileInput">Selecionar imagem</label>
+        <input id="fileInput" type="file" accept="image/*">
+      </div>
+
+      <div id="previewArea" class="preview-area"></div>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="quality">Qualidade: <span id="qualityValue">75%</span></label>
+          <input id="quality" type="range" min="30" max="95" value="75">
+        </div>
+
+        <div class="field">
+          <label for="maxWidth">Largura m&aacute;xima</label>
+          <input id="maxWidth" type="number" min="320" max="5000" value="1600">
+          <small>Imagens menores n&atilde;o ser&atilde;o ampliadas.</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="button primary" id="compressButton" type="button" disabled>Comprimir e baixar</button>
+        <button class="button secondary" id="clearButton" type="button">Limpar</button>
+      </div>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script type="module" src="../js/image-compressor.js"></script>
+</body>
+</html>
