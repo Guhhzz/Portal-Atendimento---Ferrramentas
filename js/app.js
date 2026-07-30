@@ -4,6 +4,7 @@
   const form = document.getElementById('assistantForm');
   const input = document.getElementById('assistantInput');
   const result = document.getElementById('assistantResult');
+  const suggestionButtons = document.querySelectorAll('[data-suggestion]');
 
   if (menuButton && sidebar) {
     menuButton.setAttribute('aria-expanded', 'false');
@@ -37,6 +38,11 @@
       words: ['comprimir', 'diminuir', 'reduzir', 'arquivo menor', 'imagem pesada', 'foto pesada', 'tamanho da foto'],
       title: 'Comprimir imagem',
       url: 'pages/comprimir-imagem.html'
+    },
+    {
+      words: ['gravar tela', 'gravacao de tela', 'capturar tela', 'screen recorder', 'video da tela', 'filmar tela', 'som do sistema'],
+      title: 'Gravador de tela',
+      url: 'pages/gravador-tela.html'
     },
     {
       words: ['gravar', 'microfone', 'voz', 'audio', 'gravacao', 'gravar audio', 'baixar gravacao'],
@@ -77,6 +83,14 @@
       result.appendChild(createStatus('Ainda n\u00e3o encontrei uma ferramenta exata. Escolha uma das op\u00e7\u00f5es dispon\u00edveis abaixo.', 'info'));
     });
   }
+
+  suggestionButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      if (!input || !form) return;
+      input.value = button.dataset.suggestion || '';
+      form.requestSubmit();
+    });
+  });
 
   function normalizeText(value) {
     return value

@@ -1,13 +1,14 @@
 # Portal de Ferramentas do Atendimento
 
-Aplicação estática em HTML, CSS e JavaScript para publicação no GitHub Pages.
+Aplicacao estatica em HTML, CSS e JavaScript para publicacao no GitHub Pages.
 
 ## Funcionalidades atuais
 
-- Conversão de imagem para JPG, PNG e WEBP
-- Compressão de imagem em WEBP
-- Geração de PDF a partir de várias imagens
-- Gravação de áudio pelo microfone
+- Conversao de imagem para JPG, PNG e WEBP
+- Compressao de imagem em WEBP
+- Geracao de PDF a partir de varias imagens
+- Gravacao de audio pelo microfone
+- Gravacao de tela com microfone e som do sistema quando suportado
 - Assistente simples por palavras-chave
 - Layout responsivo
 - Processamento local no navegador
@@ -16,35 +17,35 @@ Aplicação estática em HTML, CSS e JavaScript para publicação no GitHub Page
 
 ```text
 portal-ferramentas-atendimento/
-├── index.html
-├── css/style.css
-├── js/
-├── pages/
-└── CONTEXTO_CODEX.md
+|-- index.html
+|-- css/style.css
+|-- js/
+|-- pages/
+|-- CONTEXTO_CODEX.md
 ```
 
-## Publicação no GitHub Pages
+## Publicacao no GitHub Pages
 
-1. Crie um repositório no GitHub.
-2. Envie todos os arquivos deste projeto para a raiz do repositório.
+1. Crie um repositorio no GitHub.
+2. Envie todos os arquivos deste projeto para a raiz do repositorio.
 3. Abra Settings > Pages.
 4. Em Source, selecione Deploy from a branch.
 5. Escolha a branch main e a pasta /root.
-6. Salve e aguarde a publicação.
+6. Salve e aguarde a publicacao.
 
-## Observações
+## Observacoes
 
-- O microfone exige HTTPS. O GitHub Pages já fornece HTTPS.
-- O áudio é salvo em WEBM ou OGG, dependendo do navegador.
-- A página de PDF usa jsPDF por CDN.
-- Os módulos JavaScript funcionam normalmente no GitHub Pages.
-- Ao abrir os arquivos diretamente com file://, alguns navegadores podem bloquear módulos ou microfone.
+- O microfone e a gravacao de tela exigem HTTPS. O GitHub Pages ja fornece HTTPS.
+- O audio e salvo em WEBM ou OGG, dependendo do navegador.
+- A gravacao de tela normalmente e salva em WEBM no Chrome/Edge.
+- MP4 so sera gerado quando o navegador oferecer suporte real via MediaRecorder.
+- A pagina de PDF usa jsPDF por CDN.
+- Os scripts tambem foram ajustados para funcionar ao abrir as paginas por arquivo local.
 
-## Próximas funcionalidades sugeridas
+## Proximas funcionalidades sugeridas
 
-- Conversão de áudio para MP3 com ffmpeg.wasm
-- Conversão e compressão de vídeos pequenos
-- Reordenação das imagens por arrastar e soltar
+- Conversao de audio para MP3 com ffmpeg.wasm
+- Reordenacao das imagens por arrastar e soltar
 - Redimensionador e recortador de imagens
 - Ferramentas adicionais para PDF
-- PWA para instalação no computador
+- PWA para instalacao no computador

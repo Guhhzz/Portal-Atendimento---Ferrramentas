@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Grave a tela com microfone e audio do sistema quando o navegador permitir.">
+  <title>Gravador de tela | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Ferramenta</span>
+        <h1>Gravador de tela</h1>
+      </div>
+      <a class="back-link" href="../index.html">&larr; Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card screen-recorder">
+      <div class="tool-intro">
+        <p>Grave uma aba, janela ou tela inteira. O arquivo &eacute; gerado no navegador; o som do sistema depende da op&ccedil;&atilde;o escolhida na janela de compartilhamento.</p>
+      </div>
+
+      <div class="recorder-dashboard">
+        <div class="screen-stage" id="screenStage">
+          <div class="screen-visual" aria-hidden="true">
+            <span></span>
+          </div>
+          <span class="eyebrow">Tempo de grava&ccedil;&atilde;o</span>
+          <div class="timer" id="timer">00:00</div>
+          <div class="format-badge" id="formatBadge">Formato detectado ao iniciar</div>
+        </div>
+
+        <div class="recording-options" aria-label="Op&ccedil;&otilde;es da grava&ccedil;&atilde;o">
+          <label class="toggle-option">
+            <input id="micAudio" type="checkbox" checked>
+            <span>Microfone</span>
+          </label>
+
+          <label class="toggle-option">
+            <input id="systemAudio" type="checkbox" checked>
+            <span>Som do sistema</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions recorder-actions">
+        <button class="button primary" id="startButton" type="button">Iniciar grava&ccedil;&atilde;o</button>
+        <button class="button secondary" id="pauseButton" type="button" disabled>Pausar</button>
+        <button class="button danger" id="stopButton" type="button" disabled>Finalizar</button>
+      </div>
+
+      <video class="video-preview" id="videoPreview" controls hidden></video>
+
+      <div class="actions recorder-actions">
+        <button class="button primary" id="downloadButton" type="button" disabled>Baixar v&iacute;deo</button>
+        <button class="button secondary" id="deleteButton" type="button" disabled>Excluir e refazer</button>
+      </div>
+
+      <div id="statusBox" class="status-slot recorder-status" aria-live="polite"></div>
+
+      <p class="help-text">MP4 ser&aacute; usado apenas se o navegador oferecer suporte real. Em Chrome e Edge, o formato mais comum &eacute; WEBM.</p>
+    </section>
+  </main>
+
+  <script src="../js/file-utils.js"></script>
+  <script src="../js/screen-recorder.js"></script>
+</body>
+</html>

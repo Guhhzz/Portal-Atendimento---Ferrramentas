@@ -24,6 +24,7 @@
         <a class="nav-link" href="pages/comprimir-imagem.html">Comprimir imagem</a>
         <a class="nav-link" href="pages/imagens-para-pdf.html">Imagens para PDF</a>
         <a class="nav-link" href="pages/gravador-audio.html">Gravador de &aacute;udio</a>
+        <a class="nav-link" href="pages/gravador-tela.html">Gravador de tela</a>
       </nav>
 
       <div class="sidebar-note">
@@ -46,6 +47,11 @@
           <span class="eyebrow light">Tudo em um s&oacute; lugar</span>
           <h2>Converta, comprima e prepare arquivos sem depender de sites externos.</h2>
           <p>Ferramentas simples para o dia a dia da equipe, funcionando diretamente no navegador.</p>
+          <div class="hero-metrics" aria-label="Destaques do portal">
+            <span>Arquivos locais</span>
+            <span>Sem login</span>
+            <span>Pronto para Pages</span>
+          </div>
         </div>
         <div class="hero-badge">100% no navegador</div>
       </section>
@@ -61,6 +67,12 @@
           <input id="assistantInput" type="text" placeholder="Ex.: preciso transformar imagens em PDF" autocomplete="off">
           <button class="button primary" type="submit">Encontrar ferramenta</button>
         </form>
+        <div class="suggestion-row" aria-label="Sugest&otilde;es r&aacute;pidas">
+          <button type="button" data-suggestion="diminuir tamanho de foto">Diminuir foto</button>
+          <button type="button" data-suggestion="gravar tela com audio">Gravar tela</button>
+          <button type="button" data-suggestion="juntar imagens em pdf">Gerar PDF</button>
+          <button type="button" data-suggestion="converter png para jpg">Converter formato</button>
+        </div>
         <div id="assistantResult" class="assistant-result" aria-live="polite"></div>
       </section>
 
@@ -98,6 +110,13 @@
             <div class="tool-icon" aria-hidden="true">MIC</div>
             <h3>Gravador de &aacute;udio</h3>
             <p>Grave pelo microfone, escute e baixe o arquivo.</p>
+            <span>Abrir ferramenta &rarr;</span>
+          </a>
+
+          <a class="tool-card" href="pages/gravador-tela.html">
+            <div class="tool-icon" aria-hidden="true">REC</div>
+            <h3>Gravador de tela</h3>
+            <p>Capture a tela com microfone e, quando dispon&iacute;vel, som do sistema.</p>
             <span>Abrir ferramenta &rarr;</span>
           </a>
         </div>

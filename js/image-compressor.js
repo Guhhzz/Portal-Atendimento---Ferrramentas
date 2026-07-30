@@ -123,8 +123,15 @@ function renderPreview(file) {
   const details = document.createElement('span');
   details.textContent = `${formatBytes(file.size)} - ${file.type || 'tipo desconhecido'}`;
 
+  const removeButton = document.createElement('button');
+  removeButton.className = 'preview-remove';
+  removeButton.type = 'button';
+  removeButton.setAttribute('aria-label', 'Remover imagem selecionada');
+  removeButton.textContent = 'Excluir';
+  removeButton.addEventListener('click', clearCurrentFile);
+
   meta.append(name, details);
-  card.append(image, meta);
+  card.append(image, meta, removeButton);
   previewArea.appendChild(card);
 }
 
