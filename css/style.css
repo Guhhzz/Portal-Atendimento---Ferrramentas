@@ -243,6 +243,7 @@ img { max-width: 100%; }
 .home-page .section-heading h2 { color: var(--ink); }
 .home-page .section-heading .eyebrow { color: var(--primary); }
 .tool-carousel {
+  --tool-carousel-offset: calc(-50% - 9px);
   position: relative;
   overflow-x: hidden;
   overflow-y: visible;
@@ -258,7 +259,8 @@ img { max-width: 100%; }
   display: flex;
   gap: 18px;
   will-change: transform;
-  animation: toolMarquee 52s linear infinite;
+  animation: toolMarquee 36s linear infinite;
+  transform: translateX(0);
 }
 .tool-carousel:hover .tool-track,
 .tool-carousel:focus-within .tool-track { animation-play-state: paused; }
@@ -338,7 +340,7 @@ img { max-width: 100%; }
 }
 @keyframes toolMarquee {
   from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 9px)); }
+  to { transform: translateX(var(--tool-carousel-offset)); }
 }
 @keyframes cardMiniCarousel {
   from { background-position: 160% 0; }
@@ -635,8 +637,6 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tool-carousel { overflow-x: auto; mask-image: none; }
-  .tool-track,
   .home-page .tool-card::before,
   .hero::after,
   .home-page .tool-card::after,

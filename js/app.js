@@ -46,6 +46,17 @@
       link.tabIndex = -1;
     });
     track.appendChild(cloneSet);
+
+    const updateCarouselDistance = () => {
+      const trackStyles = window.getComputedStyle(track);
+      const trackGap = Number.parseFloat(trackStyles.columnGap || trackStyles.gap || '0') || 0;
+      const distance = originalSet.getBoundingClientRect().width + trackGap;
+      carousel.style.setProperty('--tool-carousel-offset', `-${distance}px`);
+    };
+
+    updateCarouselDistance();
+    window.addEventListener('resize', updateCarouselDistance);
+    carousel.classList.add('is-ready');
   }
 
   function initHomeParticles() {
