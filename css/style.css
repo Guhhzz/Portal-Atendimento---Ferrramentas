@@ -299,12 +299,33 @@ img { max-width: 100%; }
     linear-gradient(120deg, rgba(0,87,184,.06), rgba(18,184,201,.05));
   box-shadow: 0 16px 34px rgba(16,40,72,.10), inset 0 0 28px rgba(255,255,255,.45);
 }
+.home-page .tool-card::before {
+  inset: auto 18px 14px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0 8%, rgba(0,87,184,.16) 24%, rgba(18,184,201,.76) 48%, rgba(0,87,184,.18) 72%, transparent 92%);
+  background-size: 220% 100%;
+  opacity: .70;
+  transform: none;
+  animation: cardMiniCarousel 5.8s linear infinite;
+}
 .home-page .tool-card:nth-child(3n+2) { border-color: rgba(0,87,184,.26); }
 .home-page .tool-card:nth-child(3n+3) { border-color: rgba(18,184,201,.28); }
 .home-page .tool-card:hover {
   border-color: #8dbbe8;
   box-shadow: 0 22px 44px rgba(16,40,72,.14), 0 0 0 1px rgba(18,184,201,.10);
 }
+.home-page .tool-card:hover::before { opacity: 1; transform: none; }
+.home-page .tool-card::after {
+  background:
+    linear-gradient(105deg, transparent 0 18%, rgba(255,255,255,.62) 30%, rgba(18,184,201,.16) 42%, transparent 58%),
+    linear-gradient(90deg, transparent, rgba(0,87,184,.08), transparent);
+  transform: translateX(-128%);
+  animation: cardCarouselSweep 7.4s linear infinite;
+}
+.home-page .tool-card:nth-child(2n)::after { animation-delay: -2.2s; }
+.home-page .tool-card:nth-child(3n)::after { animation-delay: -4.1s; }
+.home-page .tool-card:hover::after { animation-duration: 4.8s; }
 .home-page .tool-card h3 { color: var(--text); }
 .home-page .tool-card p { color: var(--muted); }
 .home-page .tool-card span { color: var(--primary); }
@@ -318,6 +339,14 @@ img { max-width: 100%; }
 @keyframes toolMarquee {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-50% - 9px)); }
+}
+@keyframes cardMiniCarousel {
+  from { background-position: 160% 0; }
+  to { background-position: -160% 0; }
+}
+@keyframes cardCarouselSweep {
+  from { transform: translateX(-128%); }
+  to { transform: translateX(128%); }
 }
 
 .footer { margin-top: 34px; padding: 20px 4px 4px; display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 13px; }
@@ -608,7 +637,9 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 @media (prefers-reduced-motion: reduce) {
   .tool-carousel { overflow-x: auto; mask-image: none; }
   .tool-track,
+  .home-page .tool-card::before,
   .hero::after,
+  .home-page .tool-card::after,
   .site-particles span,
   .home-page .main-content::before { animation: none; }
 }
