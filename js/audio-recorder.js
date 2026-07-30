@@ -18,6 +18,7 @@ let audioBlob = null;
 let audioUrl = '';
 let elapsedSeconds = 0;
 let timerInterval = null;
+let recordingFormat = null;
 
 if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
   recordButton.disabled = true;
@@ -40,8 +41,8 @@ async function startRecording() {
 
   try {
     stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const preferredTypes = ['audio/webm;codecs=opus', 'audio/ogg;codecs=opus', 'audio/webm'];
-    const mimeType = preferredTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+    recordingFormat = getSupportedRecordingFormat();
+    const mimeType = recordingFormat?.mimeType || '';
 
     mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
     chunks = [];
@@ -58,7 +59,7 @@ async function startRecording() {
     startTimer();
     setRecordingButtons(true);
     recorderCircle.classList.add('recording');
-    showStatus(statusBox, 'Gravando \u00e1udio...', 'info');
+    showStatus(statusBox, `Gravando \u00e1udio em ${recordingFormat?.label || 'formato do navegador'}...`, 'info');
   } catch (error) {
     stopTracks();
     setRecordingButtons(false);
@@ -102,16 +103,18 @@ function handleRecordingStop() {
     return;
   }
 
-  audioBlob = new Blob(chunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+  audioBlob = new Blob(chunks, { type: mediaRecorder.mimeType || recordingFormat?.mimeType || 'audio/webm' });
   revokeAudioUrl();
   audioUrl = URL.createObjectURL(audioBlob);
+  const finalFormat = getFormatByMimeType(audioBlob.type);
 
   audioPreview.src = audioUrl;
   audioPreview.hidden = false;
   downloadButton.disabled = false;
   deleteButton.disabled = false;
+  downloadButton.textContent = `Baixar ${finalFormat.label}`;
 
-  showStatus(statusBox, 'Grava\u00e7\u00e3o conclu\u00edda. Escute antes de baixar.', 'success');
+  showStatus(statusBox, `Grava\u00e7\u00e3o conclu\u00edda em ${finalFormat.label}. Escute antes de baixar.`, 'success');
 }
 
 function resetRecording(options = {}) {
@@ -129,11 +132,13 @@ function resetRecording(options = {}) {
   chunks = [];
   elapsedSeconds = 0;
   mediaRecorder = null;
+  recordingFormat = null;
   updateTimer();
 
   recorderCircle.classList.remove('recording');
   setRecordingButtons(false);
   downloadButton.disabled = true;
+  downloadButton.textContent = 'Baixar \u00e1udio';
   deleteButton.disabled = true;
 
   if (!options.keepStatus) {
@@ -144,8 +149,34 @@ function resetRecording(options = {}) {
 function downloadRecording() {
   if (!audioBlob) return;
 
-  const extension = audioBlob.type.includes('ogg') ? 'ogg' : 'webm';
-  downloadBlob(audioBlob, `gravacao-atendimento-${Date.now()}.${extension}`);
+  const format = getFormatByMimeType(audioBlob.type);
+  downloadBlob(audioBlob, `gravacao-atendimento-${Date.now()}.${format.extension}`);
+}
+
+function getSupportedRecordingFormat() {
+  return getRecordingFormats().find(format => MediaRecorder.isTypeSupported(format.mimeType)) || null;
+}
+
+function getRecordingFormats() {
+  return [
+    { mimeType: 'audio/mpeg', extension: 'mp3', label: 'MP3' },
+    { mimeType: 'audio/mp4;codecs=mp4a.40.2', extension: 'm4a', label: 'M4A' },
+    { mimeType: 'audio/mp4', extension: 'm4a', label: 'M4A' },
+    { mimeType: 'audio/aac', extension: 'aac', label: 'AAC' },
+    { mimeType: 'audio/ogg;codecs=opus', extension: 'ogg', label: 'OGG' },
+    { mimeType: 'audio/webm;codecs=opus', extension: 'webm', label: 'WEBM' },
+    { mimeType: 'audio/webm', extension: 'webm', label: 'WEBM' }
+  ];
+}
+
+function getFormatByMimeType(mimeType = '') {
+  const type = mimeType.toLowerCase();
+  if (type.includes('mpeg') || type.includes('mp3')) return { extension: 'mp3', label: 'MP3' };
+  if (type.includes('mp4')) return { extension: 'm4a', label: 'M4A' };
+  if (type.includes('aac')) return { extension: 'aac', label: 'AAC' };
+  if (type.includes('ogg')) return { extension: 'ogg', label: 'OGG' };
+  if (type.includes('webm')) return { extension: 'webm', label: 'WEBM' };
+  return recordingFormat || { extension: 'webm', label: 'WEBM' };
 }
 
 function setRecordingButtons(recording) {
