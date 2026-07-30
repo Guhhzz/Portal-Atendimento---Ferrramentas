@@ -52,14 +52,16 @@
     const particles = document.getElementById('siteParticles');
     if (!particles) return;
 
-    const totalParticles = 42;
+    const totalParticles = 96;
     for (let index = 0; index < totalParticles; index += 1) {
       const particle = document.createElement('span');
       particle.style.setProperty('--particle-left', `${Math.random() * 100}%`);
-      particle.style.setProperty('--particle-delay', `${-(Math.random() * 14).toFixed(2)}s`);
-      particle.style.setProperty('--particle-duration', `${(9 + Math.random() * 10).toFixed(2)}s`);
-      particle.style.setProperty('--particle-size', `${(3 + Math.random() * 4).toFixed(1)}px`);
-      particle.style.setProperty('--particle-opacity', `${(0.12 + Math.random() * 0.35).toFixed(2)}`);
+      particle.style.setProperty('--particle-delay', `${-(Math.random() * 18).toFixed(2)}s`);
+      particle.style.setProperty('--particle-duration', `${(10 + Math.random() * 12).toFixed(2)}s`);
+      particle.style.setProperty('--particle-size', `${(4 + Math.random() * 7).toFixed(1)}px`);
+      particle.style.setProperty('--particle-opacity', `${(0.16 + Math.random() * 0.42).toFixed(2)}`);
+      particle.style.setProperty('--particle-drift', `${(-34 + Math.random() * 78).toFixed(1)}px`);
+      particle.style.setProperty('--particle-blur', `${(Math.random() * 1.2).toFixed(1)}px`);
       particles.appendChild(particle);
     }
   }
