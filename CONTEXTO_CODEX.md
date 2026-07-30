@@ -20,8 +20,8 @@ Centralizar ferramentas simples de conversao, compressao, gravacao e preparacao 
 
 ## Decisoes ja tomadas
 1. Nao utilizar Next.js, React ou qualquer framework que exija build nesta primeira versao.
-2. O gravador de audio deve priorizar MP3, M4A ou AAC quando o navegador oferecer suporte real.
-3. O gravador de audio deve baixar OGG ou WEBM quando formatos mais compativeis nao estiverem disponiveis.
+2. O gravador de audio deve converter a gravacao para MP3 no navegador para melhorar o envio pelo WhatsApp.
+3. O gravador de audio deve baixar OGG ou WEBM apenas se o conversor MP3 nao estiver disponivel.
 4. O gravador de tela deve usar MediaRecorder e baixar MP4 apenas quando o navegador oferecer suporte real; caso contrario, usar WEBM.
 5. Os arquivos devem ser processados no navegador e nao enviados para servidor.
 6. O visual deve ser profissional, tecnologico, responsivo e inspirado em tons de azul utilizados pela Gazin.
@@ -60,7 +60,7 @@ Centralizar ferramentas simples de conversao, compressao, gravacao e preparacao 
 - Preservar a identidade visual atual, salvo solicitacao expressa de redesign.
 
 ## Limitacoes conhecidas
-- MP3 direto depende do suporte real do MediaRecorder no navegador; sem esse suporte, o site usa M4A/AAC/OGG/WEBM.
+- MP3 depende do carregamento do encoder client-side; sem esse recurso, o site usa OGG/WEBM.
 - MP4 no gravador de tela depende do suporte real do navegador.
 - O som do sistema depende do navegador e da opcao de compartilhamento escolhida pelo usuario.
 - O acesso ao microfone e a gravacao de tela requerem HTTPS ou localhost.

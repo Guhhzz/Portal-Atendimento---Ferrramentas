@@ -7,7 +7,7 @@ Aplicacao estatica em HTML, CSS e JavaScript para publicacao no GitHub Pages.
 - Conversao de imagem para JPG, PNG e WEBP
 - Compressao de imagem em WEBP
 - Geracao de PDF a partir de varias imagens
-- Gravacao de audio pelo microfone com formato compativel quando suportado
+- Gravacao de audio pelo microfone com exportacao em MP3
 - Gravacao de tela com microfone e som do sistema quando suportado
 - Geracao de pacote ZIP de arquivos
 - Recorte visual de audio em WAV
@@ -40,7 +40,7 @@ portal-ferramentas-atendimento/
 ## Observacoes
 
 - O microfone e a gravacao de tela exigem HTTPS. O GitHub Pages ja fornece HTTPS.
-- O gravador de audio tenta gerar MP3, M4A ou AAC quando o navegador suporta; caso contrario, usa OGG ou WEBM.
+- O gravador de audio converte a gravacao para MP3 no navegador; se o conversor nao carregar, usa OGG ou WEBM como alternativa.
 - A gravacao de tela normalmente e salva em WEBM no Chrome/Edge.
 - As ferramentas de edicao de video usam WEBM por compatibilidade com MediaRecorder.
 - As ferramentas de audio geram WAV para preservar compatibilidade sem backend.
@@ -49,7 +49,6 @@ portal-ferramentas-atendimento/
 
 ## Proximas funcionalidades sugeridas
 
-- Conversao de audio para MP3 com ffmpeg.wasm
 - Extrair audio de videos
 - Separar paginas de PDF
 - Reordenacao das imagens por arrastar e soltar

@@ -19,6 +19,7 @@ let audioUrl = '';
 let elapsedSeconds = 0;
 let timerInterval = null;
 let recordingFormat = null;
+let rawRecordingBlob = null;
 
 if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
   recordButton.disabled = true;
@@ -59,7 +60,7 @@ async function startRecording() {
     startTimer();
     setRecordingButtons(true);
     recorderCircle.classList.add('recording');
-    showStatus(statusBox, `Gravando \u00e1udio em ${recordingFormat?.label || 'formato do navegador'}...`, 'info');
+    showStatus(statusBox, 'Gravando \u00e1udio...', 'info');
   } catch (error) {
     stopTracks();
     setRecordingButtons(false);
@@ -95,7 +96,7 @@ function stopRecording() {
   recorderCircle.classList.remove('recording');
 }
 
-function handleRecordingStop() {
+async function handleRecordingStop() {
   stopTracks();
 
   if (!chunks.length) {
@@ -103,18 +104,29 @@ function handleRecordingStop() {
     return;
   }
 
-  audioBlob = new Blob(chunks, { type: mediaRecorder.mimeType || recordingFormat?.mimeType || 'audio/webm' });
+  rawRecordingBlob = new Blob(chunks, { type: mediaRecorder.mimeType || recordingFormat?.mimeType || 'audio/webm' });
+  downloadButton.disabled = true;
+  deleteButton.disabled = true;
+  showStatus(statusBox, 'Convertendo grava\u00e7\u00e3o para MP3...', 'info');
+
+  try {
+    audioBlob = await convertToMp3(rawRecordingBlob);
+  } catch (error) {
+    audioBlob = rawRecordingBlob;
+    showStatus(statusBox, 'N\u00e3o foi poss\u00edvel converter para MP3 neste navegador. Baixe o formato alternativo gerado.', 'warning');
+  }
+
   revokeAudioUrl();
   audioUrl = URL.createObjectURL(audioBlob);
-  const finalFormat = getFormatByMimeType(audioBlob.type);
-
   audioPreview.src = audioUrl;
   audioPreview.hidden = false;
   downloadButton.disabled = false;
   deleteButton.disabled = false;
-  downloadButton.textContent = `Baixar ${finalFormat.label}`;
+  downloadButton.textContent = `Baixar ${getFormatByMimeType(audioBlob.type).label}`;
 
-  showStatus(statusBox, `Grava\u00e7\u00e3o conclu\u00edda em ${finalFormat.label}. Escute antes de baixar.`, 'success');
+  if (audioBlob.type === 'audio/mpeg') {
+    showStatus(statusBox, 'MP3 gerado. Escute antes de baixar e enviar no WhatsApp.', 'success');
+  }
 }
 
 function resetRecording(options = {}) {
@@ -129,6 +141,7 @@ function resetRecording(options = {}) {
   audioPreview.removeAttribute('src');
   audioPreview.hidden = true;
   audioBlob = null;
+  rawRecordingBlob = null;
   chunks = [];
   elapsedSeconds = 0;
   mediaRecorder = null;
@@ -159,10 +172,6 @@ function getSupportedRecordingFormat() {
 
 function getRecordingFormats() {
   return [
-    { mimeType: 'audio/mpeg', extension: 'mp3', label: 'MP3' },
-    { mimeType: 'audio/mp4;codecs=mp4a.40.2', extension: 'm4a', label: 'M4A' },
-    { mimeType: 'audio/mp4', extension: 'm4a', label: 'M4A' },
-    { mimeType: 'audio/aac', extension: 'aac', label: 'AAC' },
     { mimeType: 'audio/ogg;codecs=opus', extension: 'ogg', label: 'OGG' },
     { mimeType: 'audio/webm;codecs=opus', extension: 'webm', label: 'WEBM' },
     { mimeType: 'audio/webm', extension: 'webm', label: 'WEBM' }
@@ -172,11 +181,69 @@ function getRecordingFormats() {
 function getFormatByMimeType(mimeType = '') {
   const type = mimeType.toLowerCase();
   if (type.includes('mpeg') || type.includes('mp3')) return { extension: 'mp3', label: 'MP3' };
-  if (type.includes('mp4')) return { extension: 'm4a', label: 'M4A' };
-  if (type.includes('aac')) return { extension: 'aac', label: 'AAC' };
   if (type.includes('ogg')) return { extension: 'ogg', label: 'OGG' };
   if (type.includes('webm')) return { extension: 'webm', label: 'WEBM' };
   return recordingFormat || { extension: 'webm', label: 'WEBM' };
+}
+
+async function convertToMp3(sourceBlob) {
+  if (!window.lamejs?.Mp3Encoder) {
+    throw new Error('Conversor MP3 indisponivel.');
+  }
+
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) {
+    throw new Error('Processamento de audio indisponivel.');
+  }
+
+  const context = new AudioContextClass();
+  const audioBuffer = await context.decodeAudioData(await sourceBlob.arrayBuffer());
+  await context.close();
+
+  const sampleRate = audioBuffer.sampleRate;
+  const samples = mixToMono(audioBuffer);
+  const encoder = new lamejs.Mp3Encoder(1, sampleRate, 96);
+  const blockSize = 1152;
+  const mp3Chunks = [];
+
+  for (let offset = 0; offset < samples.length; offset += blockSize) {
+    const block = samples.subarray(offset, offset + blockSize);
+    const encoded = encoder.encodeBuffer(floatTo16BitPcm(block));
+    if (encoded.length) mp3Chunks.push(encoded);
+  }
+
+  const finalChunk = encoder.flush();
+  if (finalChunk.length) mp3Chunks.push(finalChunk);
+
+  if (!mp3Chunks.length) {
+    throw new Error('Falha ao gerar MP3.');
+  }
+
+  return new Blob(mp3Chunks, { type: 'audio/mpeg' });
+}
+
+function mixToMono(buffer) {
+  const output = new Float32Array(buffer.length);
+
+  for (let channel = 0; channel < buffer.numberOfChannels; channel += 1) {
+    const input = buffer.getChannelData(channel);
+    for (let index = 0; index < input.length; index += 1) {
+      output[index] += input[index] / buffer.numberOfChannels;
+    }
+  }
+
+  return output;
+}
+
+function floatTo16BitPcm(samples) {
+  const output = new Int16Array(samples.length);
+
+  for (let index = 0; index < samples.length; index += 1) {
+    const sample = Math.max(-1, Math.min(1, samples[index]));
+    output[index] = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
+  }
+
+  return output;
 }
 
 function setRecordingButtons(recording) {
