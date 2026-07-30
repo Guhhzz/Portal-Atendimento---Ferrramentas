@@ -11,7 +11,7 @@
   <main class="main-content tool-main">
     <header class="page-header">
       <div>
-        <span class="eyebrow">Ferramenta</span>
+        <span class="eyebrow">Atendimento &bull; Imagens</span>
         <h1>Comprimir imagem</h1>
       </div>
       <a class="back-link" href="../index.html">&larr; Voltar ao in&iacute;cio</a>
@@ -19,13 +19,13 @@
 
     <section class="workspace-card">
       <div class="tool-intro">
-        <p>Reduza imagens ajustando qualidade e largura m&aacute;xima. Algumas imagens j&aacute; otimizadas podem n&atilde;o ficar menores.</p>
+        <p>Reduza o peso de prints e evid&ecirc;ncias mantendo leitura suficiente para an&aacute;lise e registro.</p>
       </div>
 
       <div class="drop-zone" id="dropZone">
         <div class="drop-symbol" aria-hidden="true">&#8679;</div>
-        <h2>Selecione uma imagem</h2>
-        <p>A sa&iacute;da ser&aacute; gerada em WEBP para reduzir o tamanho.</p>
+        <h2>Anexe a imagem que precisa ficar mais leve</h2>
+        <p>A sa&iacute;da ser&aacute; gerada em WEBP quando o navegador concluir a compress&atilde;o.</p>
         <label class="button secondary" for="fileInput">Selecionar imagem</label>
         <input id="fileInput" type="file" accept="image/*">
       </div>
@@ -41,7 +41,7 @@
         <div class="field">
           <label for="maxWidth">Largura m&aacute;xima</label>
           <input id="maxWidth" type="number" min="320" max="5000" value="1600">
-          <small>Imagens menores n&atilde;o ser&atilde;o ampliadas.</small>
+          <small>Define o limite visual sem aumentar imagens que j&aacute; s&atilde;o menores.</small>
         </div>
       </div>
 
@@ -52,6 +52,14 @@
 
       <div id="statusBox" class="status-slot" aria-live="polite"></div>
     </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
   </main>
 
   <script src="../js/file-utils.js"></script>

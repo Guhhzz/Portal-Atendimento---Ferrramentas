@@ -1,4 +1,6 @@
 (function () {
+  document.body.classList.add('page-loaded');
+
   const menuButton = document.getElementById('menuButton');
   const sidebar = document.getElementById('sidebar');
   const form = document.getElementById('assistantForm');

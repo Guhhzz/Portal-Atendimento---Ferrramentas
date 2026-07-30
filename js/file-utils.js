@@ -110,14 +110,115 @@
     target.appendChild(status);
   }
 
+  function enhanceRanges(root = document) {
+    root.querySelectorAll('input[type="range"]').forEach(range => {
+      const update = () => {
+        const min = Number(range.min || 0);
+        const max = Number(range.max || 100);
+        const value = Number(range.value || 0);
+        const progress = ((value - min) / (max - min)) * 100;
+        range.style.setProperty('--range-progress', `${Math.max(0, Math.min(100, progress))}%`);
+      };
+
+      update();
+      range.addEventListener('input', update);
+    });
+  }
+
+  function enhanceSelects(root = document) {
+    root.querySelectorAll('select').forEach(select => {
+      if (select.dataset.enhanced === 'true') return;
+
+      select.dataset.enhanced = 'true';
+      select.classList.add('native-select');
+
+      const shell = document.createElement('div');
+      shell.className = 'custom-select';
+
+      const button = document.createElement('button');
+      button.className = 'custom-select-button';
+      button.type = 'button';
+      button.setAttribute('aria-haspopup', 'listbox');
+      button.setAttribute('aria-expanded', 'false');
+
+      const value = document.createElement('span');
+      const indicator = document.createElement('span');
+      indicator.className = 'custom-select-indicator';
+      indicator.setAttribute('aria-hidden', 'true');
+      indicator.textContent = 'v';
+
+      const list = document.createElement('div');
+      list.className = 'custom-select-list';
+      list.setAttribute('role', 'listbox');
+
+      button.append(value, indicator);
+      shell.append(button, list);
+      select.insertAdjacentElement('afterend', shell);
+
+      const close = () => {
+        shell.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+      };
+
+      const refresh = () => {
+        value.textContent = select.options[select.selectedIndex]?.textContent || 'Selecionar';
+        list.innerHTML = '';
+
+        [...select.options].forEach(option => {
+          const item = document.createElement('button');
+          item.type = 'button';
+          item.className = 'custom-select-option';
+          item.textContent = option.textContent;
+          item.setAttribute('role', 'option');
+          item.setAttribute('aria-selected', String(option.selected));
+
+          item.addEventListener('click', () => {
+            select.value = option.value;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+            refresh();
+            close();
+            button.focus();
+          });
+
+          list.appendChild(item);
+        });
+      };
+
+      button.addEventListener('click', event => {
+        event.stopPropagation();
+        const isOpen = shell.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      button.addEventListener('keydown', event => {
+        if (event.key === 'Escape') close();
+      });
+
+      select.addEventListener('change', refresh);
+      document.addEventListener('click', close);
+      refresh();
+    });
+  }
+
+  function enhanceUi() {
+    document.body.classList.add('page-loaded');
+    enhanceRanges();
+    enhanceSelects();
+  }
+
   window.FileUtils = {
     createImageFromFile,
     downloadBlob,
     formatBytes,
+    enhanceRanges,
+    enhanceSelects,
+    enhanceUi,
     isImageFile,
     safeBaseName,
     setupDropZone,
     showStatus,
     validateImageFile
   };
+
+  enhanceUi();
 })();

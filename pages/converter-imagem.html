@@ -11,7 +11,7 @@
   <main class="main-content tool-main">
     <header class="page-header">
       <div>
-        <span class="eyebrow">Ferramenta</span>
+        <span class="eyebrow">Atendimento &bull; Imagens</span>
         <h1>Converter imagem</h1>
       </div>
       <a class="back-link" href="../index.html">&larr; Voltar ao in&iacute;cio</a>
@@ -19,13 +19,13 @@
 
     <section class="workspace-card">
       <div class="tool-intro">
-        <p>Converta uma imagem para JPG, PNG ou WEBP. O processamento acontece no seu navegador.</p>
+        <p>Prepare imagens para anexos, evid&ecirc;ncias e comunicados internos escolhendo o formato certo antes do download.</p>
       </div>
 
       <div class="drop-zone" id="dropZone">
         <div class="drop-symbol" aria-hidden="true">&#8679;</div>
-        <h2>Arraste uma imagem aqui</h2>
-        <p>ou selecione um arquivo do computador</p>
+        <h2>Solte a imagem da tratativa aqui</h2>
+        <p>ou busque o arquivo salvo no computador</p>
         <label class="button secondary" for="fileInput">Selecionar imagem</label>
         <input id="fileInput" type="file" accept="image/*">
       </div>
@@ -45,7 +45,7 @@
         <div class="field">
           <label for="quality">Qualidade: <span id="qualityValue">90%</span></label>
           <input id="quality" type="range" min="40" max="100" value="90">
-          <small>Usada principalmente em JPG e WEBP.</small>
+          <small>Ajuste fino para equilibrar nitidez e tamanho do arquivo.</small>
         </div>
       </div>
 
@@ -56,6 +56,14 @@
 
       <div id="statusBox" class="status-slot" aria-live="polite"></div>
     </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
   </main>
 
   <script src="../js/file-utils.js"></script>

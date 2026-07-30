@@ -117,7 +117,7 @@ function renderList() {
     const downButton = createListButton('Descer', () => moveItem(index, 1));
     downButton.disabled = index === items.length - 1;
 
-    const removeButton = createListButton('Remover', () => removeItem(index), 'danger');
+    const removeButton = createListButton('Excluir', () => removeItem(index), 'danger');
 
     controls.append(upButton, downButton, removeButton);
     row.append(image, meta, controls);
