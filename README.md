@@ -10,8 +10,9 @@ Aplicacao estatica em HTML, CSS e JavaScript para publicacao no GitHub Pages.
 - Gravacao de audio pelo microfone
 - Gravacao de tela com microfone e som do sistema quando suportado
 - Geracao de pacote ZIP de arquivos
+- Recorte visual de audio em WAV
 - Uniao de multiplos audios em WAV
-- Recorte de video em WEBM
+- Recorte visual de video em WEBM
 - Uniao sequencial de videos em WEBM
 - Layout responsivo
 - Processamento local no navegador
@@ -42,7 +43,7 @@ portal-ferramentas-atendimento/
 - O audio e salvo em WEBM ou OGG, dependendo do navegador.
 - A gravacao de tela normalmente e salva em WEBM no Chrome/Edge.
 - As ferramentas de edicao de video usam WEBM por compatibilidade com MediaRecorder.
-- A uniao de audios gera WAV para preservar compatibilidade sem backend.
+- As ferramentas de audio geram WAV para preservar compatibilidade sem backend.
 - A pagina de PDF usa jsPDF por CDN.
 - Os scripts tambem foram ajustados para funcionar ao abrir as paginas por arquivo local.
 

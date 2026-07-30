@@ -3,34 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Recorte trechos de video diretamente no navegador.">
-  <title>Recortar v&iacute;deo | Portal de Ferramentas</title>
+  <meta name="description" content="Recorte trechos de audio diretamente no navegador.">
+  <title>Recortar &aacute;udio | Portal de Ferramentas</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="tool-page">
   <main class="main-content tool-main">
     <header class="page-header">
       <div>
-        <span class="eyebrow">Atendimento &bull; V&iacute;deo</span>
-        <h1>Recortar v&iacute;deo</h1>
+        <span class="eyebrow">Atendimento &bull; Voz</span>
+        <h1>Recortar &aacute;udio</h1>
       </div>
       <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
     </header>
 
     <section class="workspace-card">
       <div class="tool-intro">
-        <p>Assista ao v&iacute;deo, ajuste a sele&ccedil;&atilde;o na r&eacute;gua e gere um trecho em WEBM.</p>
+        <p>Ou&ccedil;a a grava&ccedil;&atilde;o, ajuste a sele&ccedil;&atilde;o na r&eacute;gua e baixe o trecho em WAV.</p>
       </div>
 
       <div class="drop-zone" id="dropZone">
         <div class="drop-symbol" aria-hidden="true">&#8679;</div>
-        <h2>Anexe o v&iacute;deo para recortar</h2>
-        <p>O trecho ser&aacute; reproduzido e gravado localmente pelo navegador.</p>
-        <label class="button secondary" for="fileInput">Selecionar v&iacute;deo</label>
-        <input id="fileInput" type="file" accept="video/*">
+        <h2>Anexe o &aacute;udio para recortar</h2>
+        <p>Use a pr&eacute;via para marcar in&iacute;cio e fim sem digitar segundos.</p>
+        <label class="button secondary" for="fileInput">Selecionar &aacute;udio</label>
+        <input id="fileInput" type="file" accept="audio/*">
       </div>
 
-      <video id="videoPreview" class="video-preview media-preview" controls hidden></video>
+      <audio id="audioPreview" class="audio-preview" controls hidden></audio>
 
       <div class="trim-editor" id="trimEditor" hidden>
         <div class="trim-readout">
@@ -55,7 +55,7 @@
       </div>
 
       <div class="actions">
-        <button class="button primary" id="trimButton" type="button" disabled>Recortar e baixar</button>
+        <button class="button primary" id="trimButton" type="button" disabled>Recortar e baixar WAV</button>
         <button class="button secondary" id="clearButton" type="button">Limpar</button>
       </div>
 
@@ -72,6 +72,6 @@
   </main>
 
   <script src="../js/file-utils.js"></script>
-  <script src="../js/video-trimmer.js"></script>
+  <script src="../js/audio-trimmer.js"></script>
 </body>
 </html>
