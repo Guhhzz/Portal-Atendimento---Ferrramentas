@@ -1,4 +1,5 @@
-import {
+(function () {
+const {
   createImageFromFile,
   downloadBlob,
   formatBytes,
@@ -6,7 +7,7 @@ import {
   setupDropZone,
   showStatus,
   validateImageFile
-} from './file-utils.js';
+} = window.FileUtils;
 
 const fileInput = document.getElementById('fileInput');
 const dropZone = document.getElementById('dropZone');
@@ -34,7 +35,7 @@ if (quality && qualityValue) {
 }
 
 setupDropZone(dropZone, fileInput, files => {
-  const file = files.find(item => item.type.startsWith('image/'));
+  const file = files.find(window.FileUtils.isImageFile);
   const validationMessage = validateImageFile(file);
 
   if (validationMessage) {
@@ -137,3 +138,4 @@ function revokePreviewUrl() {
   URL.revokeObjectURL(previewUrl);
   previewUrl = '';
 }
+})();

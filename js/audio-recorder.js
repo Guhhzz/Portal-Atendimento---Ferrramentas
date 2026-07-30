@@ -1,4 +1,5 @@
-import { downloadBlob, showStatus } from './file-utils.js';
+(function () {
+const { downloadBlob, showStatus } = window.FileUtils;
 
 const recordButton = document.getElementById('recordButton');
 const pauseButton = document.getElementById('pauseButton');
@@ -181,3 +182,4 @@ function revokeAudioUrl() {
   URL.revokeObjectURL(audioUrl);
   audioUrl = '';
 }
+})();

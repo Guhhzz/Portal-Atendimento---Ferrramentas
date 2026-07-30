@@ -1,4 +1,5 @@
-import { formatBytes, setupDropZone, showStatus, validateImageFile } from './file-utils.js';
+(function () {
+const { formatBytes, setupDropZone, showStatus, validateImageFile } = window.FileUtils;
 
 const fileInput = document.getElementById('fileInput');
 const dropZone = document.getElementById('dropZone');
@@ -219,3 +220,4 @@ async function prepareImageForPdf(file) {
     height
   };
 }
+})();
