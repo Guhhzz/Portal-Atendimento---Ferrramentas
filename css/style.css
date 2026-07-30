@@ -100,6 +100,7 @@ img { max-width: 100%; }
 
 .main-content { margin-left: 280px; width: calc(100% - 280px); padding: 28px 38px 20px; }
 .topbar { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.home-topbar { margin-bottom: 18px; }
 .topbar h1 { margin: 4px 0 0; font-size: clamp(22px, 2.4vw, 30px); }
 .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 800; color: var(--primary); }
 .eyebrow.light { color: rgba(255,255,255,.72); }
@@ -128,8 +129,6 @@ img { max-width: 100%; }
 .hero p { max-width: 590px; margin: 0; color: rgba(255,255,255,.84); line-height: 1.55; font-size: 15px; }
 .hero-brand-card { width: 156px; min-width: 156px; padding: 0; border: 0; background: transparent; color: white; box-shadow: none; text-align: center; }
 .hero-brand-card img { width: 150px; display: block; margin: 0 auto; filter: drop-shadow(0 16px 24px rgba(0,0,0,.25)); }
-.hero-metrics { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
-.hero-metrics span { padding: 8px 11px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); font-size: 12px; font-weight: 800; }
 @keyframes scanLine { 0%, 60% { transform: translateX(-110%); } 100% { transform: translateX(110%); } }
 
 .workspace-card {
@@ -160,20 +159,20 @@ img { max-width: 100%; }
 .section-heading h2 { margin: 5px 0 0; font-size: 24px; }
 .tool-carousel {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   padding: 4px 0 12px;
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 .tool-carousel::-webkit-scrollbar { display: none; }
 .tool-track {
   width: max-content;
   display: flex;
   gap: 18px;
-  animation: toolMarquee 28s linear infinite;
+  will-change: transform;
 }
-.tool-carousel:hover .tool-track,
-.tool-carousel:focus-within .tool-track { animation-play-state: paused; }
 .tool-set { display: flex; gap: 18px; }
 .tool-card { position: relative; overflow: hidden; flex: 0 0 260px; min-height: 236px; background: rgba(255,255,255,.94); border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); box-shadow: 0 8px 24px rgba(16,40,72,.06); transition: .2s ease; }
 .tool-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, var(--primary), var(--teal)); transform: scaleX(0); transform-origin: left; transition: .25s ease; }
@@ -183,10 +182,6 @@ img { max-width: 100%; }
 .tool-card p { color: var(--muted); line-height: 1.48; min-height: 50px; font-size: 14px; }
 .tool-card span { color: var(--primary); font-weight: 750; }
 .tool-icon { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; background: linear-gradient(135deg, var(--primary-light), #ddf7fb); color: var(--primary); font-size: 12px; font-weight: 900; letter-spacing: .04em; box-shadow: inset 0 0 0 1px rgba(0,87,184,.08); }
-@keyframes toolMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - 9px)); }
-}
 
 .footer { margin-top: 34px; padding: 20px 4px 4px; display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 13px; }
 
@@ -357,6 +352,10 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
   .recording-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (min-width: 821px) {
+  .home-topbar { display: none; }
+}
+
 @media (max-width: 560px) {
   html, body { overflow-x: hidden; }
   .main-content { padding-inline: 14px; }
@@ -388,6 +387,5 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tool-track { animation: none; }
   .tool-carousel { overflow-x: auto; mask-image: none; }
 }
