@@ -58,26 +58,6 @@
         </div>
       </section>
 
-      <section class="assistant-panel">
-        <div>
-          <span class="eyebrow">Busca r&aacute;pida</span>
-          <h2>O que voc&ecirc; precisa fazer?</h2>
-          <p>Digite a tarefa e abra a ferramenta certa.</p>
-        </div>
-        <form id="assistantForm" class="assistant-form">
-          <label class="visually-hidden" for="assistantInput">Descreva sua necessidade</label>
-          <input id="assistantInput" type="text" placeholder="Ex.: preciso transformar imagens em PDF" autocomplete="off">
-          <button class="button primary" type="submit">Encontrar ferramenta</button>
-        </form>
-        <div class="suggestion-row" aria-label="Sugest&otilde;es r&aacute;pidas">
-          <button type="button" data-suggestion="diminuir tamanho de foto">Diminuir foto</button>
-          <button type="button" data-suggestion="gravar tela com audio">Gravar tela</button>
-          <button type="button" data-suggestion="juntar imagens em pdf">Gerar PDF</button>
-          <button type="button" data-suggestion="converter png para jpg">Converter formato</button>
-        </div>
-        <div id="assistantResult" class="assistant-result" aria-live="polite"></div>
-      </section>
-
       <section class="section-block">
         <div class="section-heading">
           <div>
@@ -86,41 +66,82 @@
           </div>
         </div>
 
-        <div class="tool-grid">
-          <a class="tool-card" href="pages/converter-imagem.html">
-            <div class="tool-icon" aria-hidden="true">IMG</div>
-            <h3>Converter imagem</h3>
-            <p>Troque JPG, PNG ou WEBP em poucos segundos.</p>
-            <span>Abrir ferramenta &rarr;</span>
-          </a>
+        <div class="tool-carousel" aria-label="Ferramentas disponiveis">
+          <div class="tool-track">
+            <div class="tool-set">
+              <a class="tool-card" href="pages/converter-imagem.html">
+                <div class="tool-icon" aria-hidden="true">IMG</div>
+                <h3>Converter imagem</h3>
+                <p>Troque JPG, PNG ou WEBP em poucos segundos.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
 
-          <a class="tool-card" href="pages/comprimir-imagem.html">
-            <div class="tool-icon" aria-hidden="true">ZIP</div>
-            <h3>Comprimir imagem</h3>
-            <p>Reduza prints e evid&ecirc;ncias mantendo boa leitura.</p>
-            <span>Abrir ferramenta &rarr;</span>
-          </a>
+              <a class="tool-card" href="pages/comprimir-imagem.html">
+                <div class="tool-icon" aria-hidden="true">ZIP</div>
+                <h3>Comprimir imagem</h3>
+                <p>Reduza prints e evid&ecirc;ncias mantendo boa leitura.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
 
-          <a class="tool-card" href="pages/imagens-para-pdf.html">
-            <div class="tool-icon" aria-hidden="true">PDF</div>
-            <h3>Imagens para PDF</h3>
-            <p>Junte imagens em um PDF organizado.</p>
-            <span>Abrir ferramenta &rarr;</span>
-          </a>
+              <a class="tool-card" href="pages/imagens-para-pdf.html">
+                <div class="tool-icon" aria-hidden="true">PDF</div>
+                <h3>Imagens para PDF</h3>
+                <p>Junte imagens em um PDF organizado.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
 
-          <a class="tool-card" href="pages/gravador-audio.html">
-            <div class="tool-icon" aria-hidden="true">MIC</div>
-            <h3>Gravador de &aacute;udio</h3>
-            <p>Grave orienta&ccedil;&otilde;es de voz com pr&eacute;via.</p>
-            <span>Abrir ferramenta &rarr;</span>
-          </a>
+              <a class="tool-card" href="pages/gravador-audio.html">
+                <div class="tool-icon" aria-hidden="true">MIC</div>
+                <h3>Gravador de &aacute;udio</h3>
+                <p>Grave orienta&ccedil;&otilde;es de voz com pr&eacute;via.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
 
-          <a class="tool-card" href="pages/gravador-tela.html">
-            <div class="tool-icon" aria-hidden="true">REC</div>
-            <h3>Gravador de tela</h3>
-            <p>Registre passos, erros e valida&ccedil;&otilde;es em v&iacute;deo.</p>
-            <span>Abrir ferramenta &rarr;</span>
-          </a>
+              <a class="tool-card" href="pages/gravador-tela.html">
+                <div class="tool-icon" aria-hidden="true">REC</div>
+                <h3>Gravador de tela</h3>
+                <p>Registre passos, erros e valida&ccedil;&otilde;es em v&iacute;deo.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
+            </div>
+
+            <div class="tool-set" aria-hidden="true">
+              <a class="tool-card" href="pages/converter-imagem.html" tabindex="-1">
+                <div class="tool-icon" aria-hidden="true">IMG</div>
+                <h3>Converter imagem</h3>
+                <p>Troque JPG, PNG ou WEBP em poucos segundos.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
+
+              <a class="tool-card" href="pages/comprimir-imagem.html" tabindex="-1">
+                <div class="tool-icon" aria-hidden="true">ZIP</div>
+                <h3>Comprimir imagem</h3>
+                <p>Reduza prints e evid&ecirc;ncias mantendo boa leitura.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
+
+              <a class="tool-card" href="pages/imagens-para-pdf.html" tabindex="-1">
+                <div class="tool-icon" aria-hidden="true">PDF</div>
+                <h3>Imagens para PDF</h3>
+                <p>Junte imagens em um PDF organizado.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
+
+              <a class="tool-card" href="pages/gravador-audio.html" tabindex="-1">
+                <div class="tool-icon" aria-hidden="true">MIC</div>
+                <h3>Gravador de &aacute;udio</h3>
+                <p>Grave orienta&ccedil;&otilde;es de voz com pr&eacute;via.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
+
+              <a class="tool-card" href="pages/gravador-tela.html" tabindex="-1">
+                <div class="tool-icon" aria-hidden="true">REC</div>
+                <h3>Gravador de tela</h3>
+                <p>Registre passos, erros e valida&ccedil;&otilde;es em v&iacute;deo.</p>
+                <span>Abrir ferramenta &rarr;</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
