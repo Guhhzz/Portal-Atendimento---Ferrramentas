@@ -38,10 +38,10 @@ body {
 body.home-page {
   background:
     linear-gradient(90deg, rgba(2,8,18,.97), rgba(3,14,29,.90) 54%, rgba(2,8,18,.96)),
-    radial-gradient(circle, rgba(24,212,255,.14) 0 1px, transparent 1.8px),
-    radial-gradient(circle, rgba(55,230,181,.09) 0 1px, transparent 1.9px),
+    radial-gradient(circle, rgba(24,212,255,.08) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(55,230,181,.055) 0 1px, transparent 2px),
     #020914;
-  background-size: auto, 46px 46px, 78px 78px, auto;
+  background-size: auto, 68px 68px, 112px 112px, auto;
   background-position: 0 0, 0 0, 22px 34px, 0 0;
   color: #f7fbff;
 }
@@ -69,29 +69,30 @@ img { max-width: 100%; }
 .site-particles {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
   pointer-events: none;
 }
 .site-particles span {
   position: absolute;
   left: var(--particle-left);
-  bottom: -12vh;
+  bottom: var(--particle-start, -12vh);
   width: var(--particle-size);
   height: calc(var(--particle-size) * 1.38);
   border-radius: 52% 52% 58% 58%;
-  background: linear-gradient(180deg, rgba(247,251,255,.86), rgba(24,212,255,.78) 42%, rgba(18,184,201,.38));
+  background: linear-gradient(180deg, rgba(247,251,255,.92), rgba(24,212,255,.82) 46%, rgba(18,184,201,.40));
   opacity: var(--particle-opacity);
   filter: blur(var(--particle-blur));
-  box-shadow: 0 0 18px rgba(24,212,255,.72), inset 0 1px 2px rgba(255,255,255,.62);
+  box-shadow: 0 0 22px rgba(24,212,255,.76), 0 0 42px rgba(24,212,255,.18), inset 0 1px 2px rgba(255,255,255,.70);
   animation: particleRise var(--particle-duration) linear infinite;
   animation-delay: var(--particle-delay);
 }
-.home-page .app-shell { position: relative; z-index: 1; }
+.home-page .app-shell { position: relative; z-index: 2; }
 .home-page .main-content {
-  min-height: 100vh;
+  min-height: 0;
   position: relative;
   isolation: isolate;
+  padding-bottom: 8px;
 }
 .home-page .main-content::before {
   content: "";
@@ -99,10 +100,10 @@ img { max-width: 100%; }
   inset: 0 0 0 280px;
   z-index: -1;
   background:
-    radial-gradient(circle, rgba(24,212,255,.12) 0 1px, transparent 2px),
-    radial-gradient(circle, rgba(43,123,255,.10) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(24,212,255,.10) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(43,123,255,.075) 0 1px, transparent 2px),
     linear-gradient(180deg, rgba(4,17,31,.30), rgba(2,9,20,.90));
-  background-size: 54px 54px, 92px 92px, auto;
+  background-size: 70px 70px, 118px 118px, auto;
   background-position: 12px 18px, 46px 28px, 0 0;
   animation: floatBackdrop 13s ease-in-out infinite alternate;
 }
@@ -119,7 +120,7 @@ img { max-width: 100%; }
   from { transform: translate3d(0, 0, 0) scale(.92); }
   35% { transform: translate3d(calc(var(--particle-drift) * .35), -42vh, 0) scale(1); }
   70% { transform: translate3d(calc(var(--particle-drift) * .74), -82vh, 0) scale(.96); }
-  to { transform: translate3d(var(--particle-drift), -118vh, 0) scale(.88); }
+  to { transform: translate3d(var(--particle-drift), -132vh, 0) scale(.88); }
 }
 @keyframes floatBackdrop {
   from { transform: translate3d(-.5%, -.4%, 0) scale(1); }
@@ -250,6 +251,7 @@ img { max-width: 100%; }
 .button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
 .section-block { margin-top: 30px; }
+.home-page .section-block { margin-bottom: 0; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 16px; }
 .section-heading h2 { margin: 5px 0 0; font-size: 24px; }
 .home-page .section-heading h2 { color: #f7fbff; }
@@ -263,13 +265,14 @@ img { max-width: 100%; }
   scrollbar-width: none;
   scroll-behavior: smooth;
 }
+.home-page .tool-carousel { padding-bottom: 0; }
 .tool-carousel::-webkit-scrollbar { display: none; }
 .tool-track {
   width: max-content;
   display: flex;
   gap: 18px;
   will-change: transform;
-  animation: toolMarquee 42s linear infinite;
+  animation: toolMarquee 52s linear infinite;
 }
 .tool-carousel:hover .tool-track,
 .tool-carousel:focus-within .tool-track { animation-play-state: paused; }
@@ -331,6 +334,7 @@ img { max-width: 100%; }
 
 .footer { margin-top: 34px; padding: 20px 4px 4px; display: flex; justify-content: space-between; gap: 16px; color: var(--muted); font-size: 13px; }
 .home-page .footer { color: rgba(212,231,255,.58); }
+.home-page .footer { display: none !important; }
 
 .tool-page {
   background:

@@ -62,6 +62,7 @@
       particle.style.setProperty('--particle-opacity', `${(0.16 + Math.random() * 0.42).toFixed(2)}`);
       particle.style.setProperty('--particle-drift', `${(-34 + Math.random() * 78).toFixed(1)}px`);
       particle.style.setProperty('--particle-blur', `${(Math.random() * 1.2).toFixed(1)}px`);
+      particle.style.setProperty('--particle-start', `${(-16 + Math.random() * 108).toFixed(1)}vh`);
       particles.appendChild(particle);
     }
   }
