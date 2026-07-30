@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gere um pacote ZIP com arquivos diretamente no navegador.">
+  <title>Compactar arquivos | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Atendimento &bull; Arquivos</span>
+        <h1>Compactar arquivos</h1>
+      </div>
+      <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <div class="tool-intro">
+        <p>Selecione anexos, evid&ecirc;ncias e documentos para gerar um pacote ZIP localmente.</p>
+      </div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#8679;</div>
+        <h2>Anexe os arquivos do pacote</h2>
+        <p>O ZIP ser&aacute; montado no navegador, sem envio para servidor.</p>
+        <label class="button secondary" for="fileInput">Selecionar arquivos</label>
+        <input id="fileInput" type="file" multiple>
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="zipName">Nome do pacote</label>
+          <input id="zipName" type="text" value="arquivos-atendimento">
+        </div>
+
+        <div class="field">
+          <label for="compressionMode">Modo do ZIP</label>
+          <select id="compressionMode">
+            <option value="deflate">Compactar quando dispon&iacute;vel</option>
+            <option value="store">Apenas empacotar</option>
+          </select>
+          <small>Alguns navegadores podem empacotar sem reduzir tamanho.</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="button primary" id="zipButton" type="button" disabled>Gerar ZIP</button>
+        <button class="button secondary" id="clearButton" type="button">Limpar</button>
+      </div>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script src="../js/file-utils.js"></script>
+  <script src="../js/zip-packager.js"></script>
+</body>
+</html>
