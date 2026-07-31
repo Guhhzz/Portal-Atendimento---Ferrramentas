@@ -44,26 +44,19 @@ setupDropZone(dropZone, fileInput, selectedFiles => {
 generateButton.addEventListener('click', async () => {
   if (!items.length) return;
 
-  const { jsPDF } = window.jspdf || {};
-  if (!jsPDF) {
-    showStatus(statusBox, 'N\u00e3o foi poss\u00edvel carregar a biblioteca de PDF. Verifique a conex\u00e3o e tente novamente.', 'error');
-    return;
-  }
-
   setBusy(true);
 
   try {
     showStatus(statusBox, 'Gerando PDF...', 'info');
 
-    const doc = new jsPDF({ orientation: orientation.value, unit: 'mm', format: 'a4' });
+    const pages = [];
 
     for (let index = 0; index < items.length; index += 1) {
-      if (index > 0) doc.addPage('a4', orientation.value);
-
       const imageData = await prepareImageForPdf(items[index].file);
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
-      const margin = 10;
+      const pageSize = getA4PageSize(orientation.value);
+      const margin = 28.35;
+      const pageWidth = pageSize.width;
+      const pageHeight = pageSize.height;
       const maxWidth = pageWidth - margin * 2;
       const maxHeight = pageHeight - margin * 2;
       const scale = Math.min(maxWidth / imageData.width, maxHeight / imageData.height);
@@ -72,10 +65,21 @@ generateButton.addEventListener('click', async () => {
       const x = (pageWidth - width) / 2;
       const y = (pageHeight - height) / 2;
 
-      doc.addImage(imageData.dataUrl, 'JPEG', x, y, width, height, undefined, 'FAST');
+      pages.push({
+        imageBytes: imageData.bytes,
+        imageWidth: imageData.width,
+        imageHeight: imageData.height,
+        pageWidth,
+        pageHeight,
+        drawWidth: width,
+        drawHeight: height,
+        x,
+        y: pageHeight - y - height
+      });
     }
 
-    doc.save(`imagens-atendimento-${Date.now()}.pdf`);
+    const pdfBlob = buildPdf(pages);
+    window.FileUtils.downloadBlob(pdfBlob, `imagens-atendimento-${Date.now()}.pdf`);
     showStatus(statusBox, 'PDF gerado com sucesso.', 'success');
   } catch (error) {
     showStatus(statusBox, 'N\u00e3o foi poss\u00edvel gerar o PDF. Tente reduzir a quantidade ou o tamanho das imagens.', 'error');
@@ -214,10 +218,99 @@ async function prepareImageForPdf(file) {
   context.fillRect(0, 0, width, height);
   context.drawImage(image, 0, 0, width, height);
 
+  const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
   return {
-    dataUrl: canvas.toDataURL('image/jpeg', 0.92),
+    bytes: dataUrlToBytes(dataUrl),
     width,
     height
   };
+}
+
+function getA4PageSize(selectedOrientation) {
+  const portrait = { width: 595.28, height: 841.89 };
+  return selectedOrientation === 'landscape'
+    ? { width: portrait.height, height: portrait.width }
+    : portrait;
+}
+
+function dataUrlToBytes(dataUrl) {
+  const base64 = dataUrl.split(',')[1] || '';
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+
+  for (let index = 0; index < binary.length; index += 1) {
+    bytes[index] = binary.charCodeAt(index);
+  }
+
+  return bytes;
+}
+
+function buildPdf(pages) {
+  const parts = ['%PDF-1.4\n%\n'];
+  const offsets = [0];
+  const objectCount = 2 + pages.length * 3;
+
+  const addObject = content => {
+    offsets.push(byteLength(parts));
+    parts.push(`${offsets.length - 1} 0 obj\n`);
+
+    if (Array.isArray(content)) {
+      parts.push(...content);
+    } else {
+      parts.push(content);
+    }
+
+    parts.push('\nendobj\n');
+  };
+
+  const pageRefs = pages.map((_, index) => `${3 + index * 3} 0 R`);
+
+  addObject('<< /Type /Catalog /Pages 2 0 R >>');
+  addObject(`<< /Type /Pages /Kids [${pageRefs.join(' ')}] /Count ${pages.length} >>`);
+
+  pages.forEach((page, index) => {
+    const pageObjectId = 3 + index * 3;
+    const imageObjectId = pageObjectId + 1;
+    const contentObjectId = pageObjectId + 2;
+    const imageName = `Im${index + 1}`;
+    const contentStream = [
+      'q',
+      `${formatNumber(page.drawWidth)} 0 0 ${formatNumber(page.drawHeight)} ${formatNumber(page.x)} ${formatNumber(page.y)} cm`,
+      `/${imageName} Do`,
+      'Q'
+    ].join('\n');
+
+    addObject(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${formatNumber(page.pageWidth)} ${formatNumber(page.pageHeight)}] /Resources << /XObject << /${imageName} ${imageObjectId} 0 R >> >> /Contents ${contentObjectId} 0 R >>`);
+    addObject([
+      `<< /Type /XObject /Subtype /Image /Width ${page.imageWidth} /Height ${page.imageHeight} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${page.imageBytes.length} >>\nstream\n`,
+      page.imageBytes,
+      '\nendstream'
+    ]);
+    addObject(`<< /Length ${contentStream.length} >>\nstream\n${contentStream}\nendstream`);
+  });
+
+  const xrefOffset = byteLength(parts);
+  parts.push(`xref\n0 ${objectCount + 1}\n`);
+  parts.push('0000000000 65535 f \n');
+
+  offsets.slice(1).forEach(offset => {
+    parts.push(`${String(offset).padStart(10, '0')} 00000 n \n`);
+  });
+
+  parts.push(
+    `trailer\n<< /Size ${objectCount + 1} /Root 1 0 R >>\n`,
+    `startxref\n${xrefOffset}\n%%EOF`
+  );
+
+  return new Blob(parts, { type: 'application/pdf' });
+}
+
+function byteLength(parts) {
+  const encoder = new TextEncoder();
+  return parts.reduce((sum, part) => sum + (typeof part === 'string' ? encoder.encode(part).length : part.byteLength), 0);
+}
+
+function formatNumber(value) {
+  return Number(value).toFixed(2).replace(/\.?0+$/, '');
 }
 })();

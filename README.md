@@ -12,8 +12,8 @@ Aplicacao estatica em HTML, CSS e JavaScript para publicacao no GitHub Pages.
 - Geracao de pacote ZIP de arquivos
 - Recorte visual de audio em WAV
 - Uniao de multiplos audios em WAV
-- Recorte visual de video em WEBM
-- Uniao sequencial de videos em WEBM
+- Ajuste de audio com normalizacao e corte de silencio
+- Respostas rapidas para atendimento
 - Layout responsivo
 - Processamento local no navegador
 
@@ -40,18 +40,18 @@ portal-ferramentas-atendimento/
 ## Observacoes
 
 - O microfone e a gravacao de tela exigem HTTPS. O GitHub Pages ja fornece HTTPS.
-- O gravador de audio converte a gravacao para MP3 no navegador; se o conversor nao carregar, usa OGG ou WEBM como alternativa.
+- O gravador de audio usa conversor MP3 local no navegador; se o navegador bloquear a conversao, usa OGG ou WEBM como alternativa.
 - A gravacao de tela normalmente e salva em WEBM no Chrome/Edge.
-- As ferramentas de edicao de video usam WEBM por compatibilidade com MediaRecorder.
 - As ferramentas de audio geram WAV para preservar compatibilidade sem backend.
-- A pagina de PDF usa jsPDF por CDN.
+- A pagina de PDF gera o arquivo sem depender de CDN.
 - Os scripts tambem foram ajustados para funcionar ao abrir as paginas por arquivo local.
 
 ## Proximas funcionalidades sugeridas
 
-- Extrair audio de videos
 - Separar paginas de PDF
 - Reordenacao das imagens por arrastar e soltar
 - Redimensionador e recortador de imagens
 - Ferramentas adicionais para PDF
+- Transcricao de audio via backend dedicado
+- Edicao de video via backend dedicado
 - PWA para instalacao no computador
