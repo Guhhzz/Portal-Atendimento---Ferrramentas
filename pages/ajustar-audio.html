@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Normalize volume e remova silencios de arquivos de audio.">
+  <title>Ajustar &aacute;udio | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Atendimento &bull; Voz</span>
+        <h1>Ajustar &aacute;udio</h1>
+      </div>
+      <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <p class="tool-intro-copy">Melhore grava&ccedil;&otilde;es antes de enviar: volume mais uniforme e pausas longas reduzidas.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#9835;</div>
+        <h2>Anexe o &aacute;udio</h2>
+        <p>Compat&iacute;vel com MP3, WAV, M4A, OGG e WEBM.</p>
+        <label class="button secondary" for="fileInput">Selecionar &aacute;udio</label>
+        <input id="fileInput" type="file" accept="audio/*,.aac,.m4a,.mp3,.ogg,.opus,.wav,.webm">
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+      <audio id="inputPreview" class="audio-preview" controls hidden></audio>
+
+      <div class="controls-grid">
+        <label class="toggle-option"><span>Normalizar volume</span><input id="normalizeToggle" type="checkbox" checked></label>
+        <label class="toggle-option"><span>Remover pausas longas</span><input id="trimSilenceToggle" type="checkbox" checked></label>
+      </div>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="silenceThreshold">Sensibilidade do sil&ecirc;ncio</label>
+          <input id="silenceThreshold" type="range" min="1" max="8" value="3">
+          <small>Quanto maior, mais trechos baixos ser&atilde;o removidos.</small>
+        </div>
+        <div class="field">
+          <label for="paddingMs">Respiro entre cortes</label>
+          <input id="paddingMs" type="number" min="20" max="500" value="120">
+          <small>Ajuda a evitar cortes secos na fala.</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="button primary" id="processButton" type="button" disabled>Ajustar &aacute;udio</button>
+        <button class="button secondary" id="downloadButton" type="button" disabled>Baixar WAV</button>
+        <button class="button danger" id="clearButton" type="button" disabled>Limpar</button>
+      </div>
+
+      <audio id="outputPreview" class="audio-preview" controls hidden></audio>
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script src="../js/file-utils.js"></script>
+  <script src="../js/audio-enhancer.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Extraia texto de imagens e prints diretamente no navegador.">
+  <title>Imagem para texto | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Atendimento &bull; OCR</span>
+        <h1>Imagem para texto</h1>
+      </div>
+      <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <p class="tool-intro-copy">Extraia texto de prints, comprovantes e fotos sem redigitar manualmente.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#9635;</div>
+        <h2>Anexe a imagem</h2>
+        <p>Use imagens n&iacute;tidas para melhorar a leitura.</p>
+        <label class="button secondary" for="fileInput">Selecionar imagem</label>
+        <input id="fileInput" type="file" accept="image/*">
+      </div>
+
+      <div id="previewArea" class="preview-area"></div>
+
+      <div class="actions">
+        <button class="button primary" id="extractButton" type="button" disabled>Ler texto da imagem</button>
+        <button class="button secondary" id="copyButton" type="button" disabled>Copiar texto</button>
+        <button class="button secondary" id="downloadButton" type="button" disabled>Baixar TXT</button>
+        <button class="button danger" id="clearButton" type="button" disabled>Limpar</button>
+      </div>
+
+      <div class="transcription-progress" id="progressBox" hidden>
+        <div class="transcription-progress-bar"><span id="progressBar"></span></div>
+        <strong id="progressLabel">Preparando leitura...</strong>
+      </div>
+
+      <label class="transcript-label" for="ocrOutput">Texto encontrado</label>
+      <textarea id="ocrOutput" class="transcript-output" rows="10" placeholder="O texto extra&iacute;do aparecer&aacute; aqui." readonly></textarea>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="../js/file-utils.js"></script>
+  <script src="../js/ocr-image.js"></script>
+</body>
+</html>

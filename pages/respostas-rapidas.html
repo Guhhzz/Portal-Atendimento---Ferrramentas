@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Monte respostas padronizadas para atendimento.">
+  <title>Respostas r&aacute;pidas | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Atendimento &bull; Texto</span>
+        <h1>Respostas r&aacute;pidas</h1>
+      </div>
+      <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <p class="tool-intro-copy">Gere mensagens objetivas para WhatsApp, e-mail ou registro interno.</p>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="templateType">Tipo de mensagem</label>
+          <select id="templateType">
+            <option value="retorno" selected>Retorno ao cliente</option>
+            <option value="pendencia">Solicitar evid&ecirc;ncia</option>
+            <option value="validacao">Validar procedimento</option>
+            <option value="encerramento">Encerramento</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="customerName">Nome do cliente</label>
+          <input id="customerName" type="text" placeholder="Ex.: Gustavo">
+        </div>
+      </div>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="protocol">Protocolo</label>
+          <input id="protocol" type="text" placeholder="Ex.: 123456">
+        </div>
+        <div class="field">
+          <label for="channel">Canal</label>
+          <select id="channel">
+            <option value="WhatsApp" selected>WhatsApp</option>
+            <option value="E-mail">E-mail</option>
+            <option value="Telefone">Telefone</option>
+            <option value="Interno">Interno</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field template-notes">
+        <label for="notes">Detalhes</label>
+        <textarea id="notes" class="transcript-output compact-textarea" rows="5" placeholder="Informe o contexto, pend&ecirc;ncia ou orienta&ccedil;&atilde;o principal."></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="button primary" id="generateButton" type="button">Gerar mensagem</button>
+        <button class="button secondary" id="copyButton" type="button" disabled>Copiar mensagem</button>
+        <button class="button secondary" id="downloadButton" type="button" disabled>Baixar TXT</button>
+        <button class="button danger" id="clearButton" type="button">Limpar</button>
+      </div>
+
+      <label class="transcript-label" for="messageOutput">Mensagem pronta</label>
+      <textarea id="messageOutput" class="transcript-output" rows="9" placeholder="A mensagem gerada aparecer&aacute; aqui." readonly></textarea>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script src="../js/file-utils.js"></script>
+  <script src="../js/quick-replies.js"></script>
+</body>
+</html>

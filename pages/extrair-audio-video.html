@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Extraia o audio de videos diretamente no navegador.">
+  <title>Extrair &aacute;udio | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Atendimento &bull; M&iacute;dia</span>
+        <h1>Extrair &aacute;udio</h1>
+      </div>
+      <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card">
+      <p class="tool-intro-copy">Transforme o som de um v&iacute;deo em arquivo de &aacute;udio para anexar ou arquivar.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#9655;</div>
+        <h2>Anexe o v&iacute;deo</h2>
+        <p>Use arquivos MP4, MOV, WEBM ou formatos aceitos pelo navegador.</p>
+        <label class="button secondary" for="fileInput">Selecionar v&iacute;deo</label>
+        <input id="fileInput" type="file" accept="video/*">
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+      <video id="videoPreview" class="video-preview media-preview" controls hidden></video>
+
+      <div class="actions">
+        <button class="button primary" id="extractButton" type="button" disabled>Extrair &aacute;udio</button>
+        <button class="button secondary" id="downloadButton" type="button" disabled>Baixar &aacute;udio</button>
+        <button class="button danger" id="clearButton" type="button" disabled>Limpar</button>
+      </div>
+
+      <audio id="audioPreview" class="audio-preview" controls hidden></audio>
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script src="../js/file-utils.js"></script>
+  <script src="../js/video-audio-extractor.js"></script>
+</body>
+</html>
