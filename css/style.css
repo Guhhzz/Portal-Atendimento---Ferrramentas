@@ -50,6 +50,7 @@ a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
 button { cursor: pointer; }
 img { max-width: 100%; }
+[hidden] { display: none !important; }
 
 .visually-hidden {
   width: 1px;
@@ -485,6 +486,43 @@ input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius
 .recorder-status { width: min(100%, 620px); }
 .help-text { color: var(--muted); max-width: 650px; line-height: 1.6; }
 @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(180,35,24,.18); } 50% { box-shadow: 0 0 0 20px rgba(180,35,24,0); } }
+
+.tool-intro-copy { margin: 0 0 18px; color: var(--muted); max-width: 760px; }
+.transcription-tool .audio-preview { display: block; margin-inline: auto; }
+.transcription-progress {
+  margin-top: 18px;
+  display: grid;
+  gap: 8px;
+}
+.transcription-progress-bar {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #d8e4f1;
+}
+.transcription-progress-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary), var(--teal));
+  transition: width .25s ease;
+}
+.transcription-progress strong { color: var(--primary-dark); font-size: 13px; }
+.transcript-label { display: block; margin-top: 20px; font-size: 13px; font-weight: 800; }
+.transcript-output {
+  width: 100%;
+  min-height: 230px;
+  margin-top: 8px;
+  resize: vertical;
+  border: 1px solid #c8d7e8;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  color: var(--text);
+  padding: 16px;
+  line-height: 1.6;
+  box-shadow: inset 0 1px 4px rgba(16,40,72,.04);
+}
 
 .screen-recorder { display: grid; gap: 20px; overflow: hidden; }
 .recorder-dashboard { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 18px; align-items: stretch; min-width: 0; }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Transcreva arquivos de audio em texto diretamente no navegador.">
+  <title>Transcrever &aacute;udio | Portal de Ferramentas</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="tool-page">
+  <main class="main-content tool-main">
+    <header class="page-header">
+      <div>
+        <span class="eyebrow">Atendimento &bull; Texto</span>
+        <h1>Transcrever &aacute;udio</h1>
+      </div>
+      <a class="back-link" href="../index.html">Voltar ao in&iacute;cio</a>
+    </header>
+
+    <section class="workspace-card transcription-tool">
+      <p class="tool-intro-copy">Anexe um &aacute;udio e gere a transcri&ccedil;&atilde;o em texto no pr&oacute;prio navegador.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-symbol" aria-hidden="true">&#8645;</div>
+        <h2>Anexe o &aacute;udio para transcrever</h2>
+        <p>Compat&iacute;vel com MP3, WAV, M4A, OGG e WEBM.</p>
+        <label class="button secondary" for="fileInput">Selecionar &aacute;udio</label>
+        <input id="fileInput" type="file" accept="audio/*,.aac,.m4a,.mp3,.ogg,.opus,.wav,.webm">
+      </div>
+
+      <div id="fileList" class="file-list"></div>
+      <audio id="audioPreview" class="audio-preview" controls hidden></audio>
+
+      <div class="controls-grid">
+        <div class="field">
+          <label for="modelSelect">Precis&atilde;o</label>
+          <select id="modelSelect">
+            <option value="precise" selected>Mais precisa</option>
+            <option value="fast">Mais r&aacute;pida</option>
+          </select>
+          <small>A primeira execu&ccedil;&atilde;o carrega o modelo de IA.</small>
+        </div>
+
+        <div class="field">
+          <label for="languageSelect">Idioma</label>
+          <select id="languageSelect">
+            <option value="portuguese" selected>Portugu&ecirc;s</option>
+            <option value="">Detectar automaticamente</option>
+          </select>
+          <small>Use detec&ccedil;&atilde;o autom&aacute;tica para &aacute;udios mistos.</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="button primary" id="transcribeButton" type="button" disabled>Transcrever &aacute;udio</button>
+        <button class="button secondary" id="copyButton" type="button" disabled>Copiar texto</button>
+        <button class="button secondary" id="downloadButton" type="button" disabled>Baixar TXT</button>
+        <button class="button danger" id="clearButton" type="button" disabled>Limpar</button>
+      </div>
+
+      <div class="transcription-progress" id="progressBox" hidden>
+        <div class="transcription-progress-bar"><span id="progressBar"></span></div>
+        <strong id="progressLabel">Preparando transcri&ccedil;&atilde;o...</strong>
+      </div>
+
+      <label class="transcript-label" for="transcriptOutput">Texto transcrito</label>
+      <textarea id="transcriptOutput" class="transcript-output" rows="10" placeholder="A transcri&ccedil;&atilde;o aparecer&aacute; aqui." readonly></textarea>
+
+      <div id="statusBox" class="status-slot" aria-live="polite"></div>
+    </section>
+
+    <aside class="cx-signature">
+      <img src="../assets/logos/cx-customer-experience.svg" alt="Dados CX Customer Experience Gazin">
+      <div>
+        <strong>Dados CX</strong>
+        <span>Ferramenta interna do N&uacute;cleo Customer Experience.</span>
+      </div>
+    </aside>
+  </main>
+
+  <script src="../js/file-utils.js"></script>
+  <script type="module" src="../js/audio-transcriber.js"></script>
+</body>
+</html>
