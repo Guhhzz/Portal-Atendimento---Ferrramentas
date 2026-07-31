@@ -26,8 +26,41 @@
     });
   }
 
+  initSidebarGroups();
   initToolCarousel();
   initHomeParticles();
+
+  function initSidebarGroups() {
+    const groups = Array.from(document.querySelectorAll('.nav-group'));
+    if (!groups.length) return;
+
+    groups.forEach((group, index) => {
+      const toggle = group.querySelector('.nav-group-toggle');
+      const submenu = group.querySelector('.nav-submenu');
+      if (!toggle || !submenu) return;
+
+      const startsOpen = group.classList.contains('open');
+      toggle.setAttribute('aria-expanded', String(startsOpen));
+      submenu.hidden = !startsOpen;
+      group.style.setProperty('--group-order', index);
+
+      toggle.addEventListener('click', () => {
+        const shouldOpen = !group.classList.contains('open');
+
+        groups.forEach(otherGroup => {
+          const otherToggle = otherGroup.querySelector('.nav-group-toggle');
+          const otherSubmenu = otherGroup.querySelector('.nav-submenu');
+          otherGroup.classList.remove('open');
+          otherToggle?.setAttribute('aria-expanded', 'false');
+          if (otherSubmenu) otherSubmenu.hidden = true;
+        });
+
+        group.classList.toggle('open', shouldOpen);
+        toggle.setAttribute('aria-expanded', String(shouldOpen));
+        submenu.hidden = !shouldOpen;
+      });
+    });
+  }
 
   function initToolCarousel() {
     const carousel = document.querySelector('.tool-carousel');

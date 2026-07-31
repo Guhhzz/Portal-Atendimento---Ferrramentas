@@ -22,22 +22,58 @@
 
       <nav class="nav-menu" aria-label="Menu principal">
         <a class="nav-link active" href="index.html" aria-current="page">In&iacute;cio</a>
-        <a class="nav-link" href="pages/converter-imagem.html">Converter imagem</a>
-        <a class="nav-link" href="pages/comprimir-imagem.html">Comprimir imagem</a>
-        <a class="nav-link" href="pages/ocr-imagem.html">Imagem para texto</a>
-        <a class="nav-link" href="pages/imagens-para-pdf.html">Imagens para PDF</a>
-        <a class="nav-link" href="pages/gravador-audio.html">Gravador de &aacute;udio</a>
-        <a class="nav-link" href="pages/transcrever-audio.html">Transcrever &aacute;udio</a>
-        <a class="nav-link" href="pages/ajustar-audio.html">Ajustar &aacute;udio</a>
-        <a class="nav-link" href="pages/gravador-tela.html">Gravador de tela</a>
-        <a class="nav-link" href="pages/extrair-audio-video.html">Extrair &aacute;udio</a>
-        <a class="nav-link" href="pages/compactar-arquivos.html">Compactar arquivos</a>
-        <a class="nav-link" href="pages/gerar-qrcode.html">Gerar QR Code</a>
-        <a class="nav-link" href="pages/respostas-rapidas.html">Respostas r&aacute;pidas</a>
-        <a class="nav-link" href="pages/recortar-audio.html">Recortar &aacute;udio</a>
-        <a class="nav-link" href="pages/unir-audios.html">Unir &aacute;udios</a>
-        <a class="nav-link" href="pages/recortar-video.html">Recortar v&iacute;deo</a>
-        <a class="nav-link" href="pages/unir-videos.html">Unir v&iacute;deos</a>
+
+        <div class="nav-group">
+          <button class="nav-group-toggle" type="button" aria-expanded="false" aria-controls="navImages">
+            <span class="nav-group-icon">IMG</span>
+            <span>Imagem e PDF</span>
+          </button>
+          <div class="nav-submenu" id="navImages">
+            <a class="nav-link" href="pages/converter-imagem.html">Converter imagem</a>
+            <a class="nav-link" href="pages/comprimir-imagem.html">Comprimir imagem</a>
+            <a class="nav-link" href="pages/ocr-imagem.html">Imagem para texto</a>
+            <a class="nav-link" href="pages/imagens-para-pdf.html">Imagens para PDF</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <button class="nav-group-toggle" type="button" aria-expanded="false" aria-controls="navAudio">
+            <span class="nav-group-icon">AUD</span>
+            <span>&Aacute;udio e voz</span>
+          </button>
+          <div class="nav-submenu" id="navAudio">
+            <a class="nav-link" href="pages/gravador-audio.html">Gravador de &aacute;udio</a>
+            <a class="nav-link" href="pages/transcrever-audio.html">Transcrever &aacute;udio</a>
+            <a class="nav-link" href="pages/ajustar-audio.html">Ajustar &aacute;udio</a>
+            <a class="nav-link" href="pages/recortar-audio.html">Recortar &aacute;udio</a>
+            <a class="nav-link" href="pages/unir-audios.html">Unir &aacute;udios</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <button class="nav-group-toggle" type="button" aria-expanded="false" aria-controls="navVideo">
+            <span class="nav-group-icon">REC</span>
+            <span>V&iacute;deo e tela</span>
+          </button>
+          <div class="nav-submenu" id="navVideo">
+            <a class="nav-link" href="pages/gravador-tela.html">Gravador de tela</a>
+            <a class="nav-link" href="pages/extrair-audio-video.html">Extrair &aacute;udio</a>
+            <a class="nav-link" href="pages/recortar-video.html">Recortar v&iacute;deo</a>
+            <a class="nav-link" href="pages/unir-videos.html">Unir v&iacute;deos</a>
+          </div>
+        </div>
+
+        <div class="nav-group">
+          <button class="nav-group-toggle" type="button" aria-expanded="false" aria-controls="navFiles">
+            <span class="nav-group-icon">CX</span>
+            <span>Arquivos e CX</span>
+          </button>
+          <div class="nav-submenu" id="navFiles">
+            <a class="nav-link" href="pages/compactar-arquivos.html">Compactar arquivos</a>
+            <a class="nav-link" href="pages/gerar-qrcode.html">Gerar QR Code</a>
+            <a class="nav-link" href="pages/respostas-rapidas.html">Respostas r&aacute;pidas</a>
+          </div>
+        </div>
       </nav>
     </aside>
 
